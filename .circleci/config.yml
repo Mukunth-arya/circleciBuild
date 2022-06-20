@@ -3,7 +3,7 @@ version: 2
 jobs:
    build:
      environmnt:
-       IMAGE_NAME: mukuntharya2022/gosimple:latest
+       IMAGE_NAME: mukuntharya2022/gosimple
      docker:
        - image: circleci/buildpack-deps:stretch
      steps:
@@ -11,7 +11,7 @@ jobs:
        - setup_remote_docker
        - run:
            name: Build docker image
-           command: docker build -t  $IMAGE_NAME .
+           command: docker build -t  $IMAGE_NAME:latest .
    publish-latest:
      environment:
        IMAGE_NAME: mukuntharya2022/gosimple:latest
