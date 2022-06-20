@@ -11,7 +11,7 @@ jobs:
        - setup_remote_docker
        - run:
            name: Build docker image
-           command: docker build -t  $IMAGE_NAME
+           command: docker build -t  mukuntharya2022/gosimple:latest .
    publish-latest:
      environment:
        IMAGE_NAME: mukuntharya2022/gosimple:latest
