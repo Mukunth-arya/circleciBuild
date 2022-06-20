@@ -23,7 +23,7 @@ jobs:
            name: Publish image to docker hub
            command: 
              
-             docker push mukuntharya2022/gosimple:latest
+             docker push mukuntharya2022/gosimple:lates
 workflows:
   version: 2
   build-master:
