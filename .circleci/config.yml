@@ -22,8 +22,8 @@ jobs:
        - run:
            name: Publish image to docker hub
            command: 
-             echo "$DOCKERHUB_PASS" | dockerl login -u "$DOCKERHUB_USERNAME"
-             docker push &IMAGE_NAME 
+             
+             docker push mukuntharya2022/gosimple:latest 
 workflows:
   version: 2
   build-master:
