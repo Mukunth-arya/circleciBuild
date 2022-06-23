@@ -3,6 +3,8 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: mukuntharya2022/gosimple
+      DOCKERHUB_PASS: bXVrdW50aEAxOTk2Cg==
+      DOCKERHUB_USERNAME: bXVrdW50aGFyeWEyMDIyCg==
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
