@@ -18,10 +18,11 @@ jobs:
           command: |
            
             docker build -t $IMAGE_NAME:v1 .
-            go test $IMAGE_NAME:v1 
+             
       - run:
           name: Archive the docker image
           command: docker save -o myimage.tar $IMAGE_NAME
+          
       - persist_to_workspace:
           root: .
           paths:
@@ -30,7 +31,9 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/workspace/myimage.tar
+      - run:
+          docker test /tmp/workspace/image.tar
       - setup_remote_docker
       - run:
           name: Load saved file
