@@ -16,7 +16,7 @@ jobs:
       - run:
           name: build docker image
           command: |
-       
+            
             docker build -t $IMAGE_NAME:v1 .
              
       - run:
@@ -31,8 +31,8 @@ jobs:
     executor: docker-publisher
     steps:
       - attach_workspace:
-          at: /tmp/workspace/myimage.tar
-      
+          at: /tmp/workspace
+   
       - setup_remote_docker
       - run:
           name: Load saved file
