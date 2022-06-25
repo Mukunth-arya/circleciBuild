@@ -10,17 +10,17 @@ jobs:
   build: 
     executors: docker-pubisher
     steps:
-       - checkout
-       - setup_remote_docker
-       - run:
-           name: build docker image
-           command: |
-             go test
-             docker build -t $IMAGE_NAME:v1 .
-        - run:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build docker image
+          command: |
+            go test
+            docker build -t $IMAGE_NAME:v1 .
+      - run:
             name: Archive the docker image
             command: docker save -o myimage.tar $IMAGE_NAME
-        - persist_to_workspace:
+      - persist_to_workspace:
             root: .
             paths:
               - ./myimage.tar
