@@ -4,11 +4,12 @@ executors:
     environment:
       IMAGE_NAME: mukuntharya2022/gosimples
       DOCKERHUB_PASS: mukunth@1996
+      DOCKERHUB_USERNAME: mukuntharya2022
   docker:
     - image: circleci/buildpack-deps:stretch
 jobs:
   build: 
-    executors: docker-pubisher
+    executor: docker-pubisher
     steps:
       - checkout
       - setup_remote_docker
@@ -17,13 +18,14 @@ jobs:
           command: |
             go test
             docker build -t $IMAGE_NAME:v1 .
+            
       - run:
-            name: Archive the docker image
-            command: docker save -o myimage.tar $IMAGE_NAME
+          name: Archive the docker image
+          command: docker save -o myimage.tar $IMAGE_NAME
       - persist_to_workspace:
-            root: .
-            paths:
-              - ./myimage.tar
+          root: .
+          paths:
+            - ./myimage.tar
   publish-latest:
     executor: docker-publisher
     steps:
