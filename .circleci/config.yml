@@ -5,8 +5,8 @@ executors:
       IMAGE_NAME: mukuntharya2022/gosimples
       DOCKERHUB_PASS: mukunth@1996
       DOCKERHUB_USERNAME: mukuntharya2022
-  docker:
-    - image: circleci/buildpack-deps:stretch
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs:
   build: 
     executor: docker-pubisher
