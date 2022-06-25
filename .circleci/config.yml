@@ -33,7 +33,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace/myimage.tar
       - run:
-          docker test /tmp/workspace/image.tar
+          go test /tmp/workspace/image.tar
       - setup_remote_docker
       - run:
           name: Load saved file
