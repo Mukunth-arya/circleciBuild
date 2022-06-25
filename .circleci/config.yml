@@ -16,9 +16,9 @@ jobs:
       - run:
           name: build docker image
           command: |
-            go test
+           
             docker build -t $IMAGE_NAME:v1 .
-            
+            go test $IMAGE_NAME:v1 
       - run:
           name: Archive the docker image
           command: docker save -o myimage.tar $IMAGE_NAME
