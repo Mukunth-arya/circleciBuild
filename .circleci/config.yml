@@ -1,6 +1,6 @@
 version: 2.1
 executors: 
-  docker-publisher
+  docker-publisher:
     environment:
       IMAGE_NAME: mukuntharya2022/gosimples
       DOCKERHUB_PASS: mukunth@1996
