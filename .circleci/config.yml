@@ -12,22 +12,22 @@ jobs:
   build:
     
     executor: docker-publisher
-      steps: 
-        - checkout
+    steps: 
+      - checkout
       
-        - setup_remote_docker
-        - run:
-            name: build docker image
-            command: |
-              docker build -t $IMAGE_NAME:v2 .
-        - run:
-            name: archive the docker image
-            command: docker save -o myimage.tar $IMAGE_NAME
+      - setup_remote_docker
+      - run:
+          name: build docker image
+          command: |
+            docker build -t $IMAGE_NAME:v2 .
+      - run:
+          name: archive the docker image
+          command: docker save -o myimage.tar $IMAGE_NAME
           
-        - persist_to_workspace:
-            root: .
-            paths: 
-              - ./myimage.tar
+      - persist_to_workspace:
+          root: .
+          paths: 
+            - ./myimage.tar
        
   publish-latest:
     executor: docker-publisher
