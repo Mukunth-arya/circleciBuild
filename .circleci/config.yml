@@ -6,17 +6,16 @@ executors:
       DOCKERHUB_PASS: mukunth@1996
       DOCKERHUB_USERNAME: mukuntharya2022
     docker:
-      - image: circleci/golang:1.18
+      
       - image: ciecleci/buidpack-deps:stretch
 
 jobs:
   build:
     
     executor: docker-publisher
-    working_directory:  /home/mukunth/circleci
-    steps: 
+        steps: 
       - checkout
-      - run: go test
+      
       - setup_remote_docker
       - run:
           name: build docker image
