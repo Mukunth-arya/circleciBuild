@@ -13,7 +13,7 @@ jobs:
   build:
     
     executor: docker-publisher
-    working_directory: /home/mukunth/circleci
+    working_directory:  /home/mukunth/circleci
     steps: 
       - checkout
       - run: go test
