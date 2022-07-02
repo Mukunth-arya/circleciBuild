@@ -3,8 +3,8 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: mukuntharya2022/gosimple
-      DOCKER-PASS: mukunth@1996
-      DOCKER_USERNAME: mukuntharya2022
+      DOCKERHUB_PASS: mukunth@1996
+      DOCKERHUB_USERNAME: mukuntharya2022
     docker:
       - image: circleci/golang:1.18
       - image: ciecleci/buidpack-deps:stretch
@@ -37,7 +37,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
             
-      - setup_remote_docker:
+      - setup_remote_docker
       - run: 
           name: Load Saved file
           command: docker load -i /tmp/workspace/myimage.tar
