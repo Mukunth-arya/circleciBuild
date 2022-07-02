@@ -26,7 +26,7 @@ jobs:
           name: archive the docker image
           command: docker save -o myimage.tar $IMAGE_NAME
           
-      - persists_to_workspace:
+      - persist_to_workspace:
           root: .
           paths: 
             - ./myimage.tar
