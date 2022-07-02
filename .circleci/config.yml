@@ -29,22 +29,22 @@ jobs:
           paths: 
             - ./myimage.tar
        
-    publish-latest:
-      executor: docker-publisher
-      steps:
-        - attach_workspace:
-            at: /tmp/workspace
+  publish-latest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+        at: /tmp/workspace
             
-        - setup_remote_docker:
-        - run: 
-            name: Load Saved file
-            command: docker load -i /tmp/workspace/myimage.tar
+      - setup_remote_docker:
+      - run: 
+          name: Load Saved file
+          command: docker load -i /tmp/workspace/myimage.tar
             
-        - run:
-            name: publish image to docker hub
-            command:
-               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --pasword-stdin
-               docker push $IMAGE_NAME:v2
+      - run:
+          name: publish image to docker hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --pasword-stdin
+            docker push $IMAGE_NAME:v2
             
 workflows:
   version: 2
