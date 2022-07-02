@@ -6,18 +6,12 @@ executors:
       DOCKER-PASS: mukunth@1996
       DOCKER_USERNAME: mukuntharya2022
     docker:
-      - image: circleci/golang:1.18
+      
       - image: ciecleci/buidpack-deps:stretch
 
 jobs:
   build:
-    executor: docker-publisher 
-     
-    working_directory: /home/mukunth/circleci  
-    steps:
-      - checkout
-      
-      - run: go test 
+    
     executor: docker-publisher
     steps: 
       - checkout
