@@ -1,65 +1,67 @@
 version: 2.1
-executors: 
+executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: mukuntharya2022/gosimples
-      DOCKERHUB_PASS: mukunth@1996
-      DOCKERHUB_USERNAME: mukuntharya2022
+      IMAGE_NAME: mukuntharya2022/gosimple
+      DOCKER-PASS: mukunth@1996
+      DOCKER_USERNAME: mukuntharya2022
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: ciecleci/buidpack-deps:stretch
+
 jobs:
-  build: 
-    executor: docker-publisher
+  build:
+    docker: 
+      - image: circleci/golang:1.18
+    working_directory: /home/mukunth/circleci  
     steps:
+      - checkout
+      
+      - run: go test 
+    executors: docker-publisher
+    steps: 
       - checkout
       - setup_remote_docker
       - run:
           name: build docker image
           command: |
-            
-            docker build -t $IMAGE_NAME:v1 .
-             
+            docker build -t $IMAGE_NAME:v2
       - run:
-          name: Archive the docker image
+          name: archive the docker image
           command: docker save -o myimage.tar $IMAGE_NAME
           
-      - persist_to_workspace:
+      - persists_to_workspace:
           root: .
-          paths:
+          paths: 
             - ./myimage.tar
-  publish-latest:
-    executor: docker-publisher
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-   
-      - setup_remote_docker
-      - run:
-          name: Load saved file
-          command: docker load -i /tmp/workspace/myimage.tar
-      - run:
-          name: Publish image to docker Hub
-          command: |
-            echo "&DOCKERHUB_PASS" | docker login -u "&DOCKERHUB_USERNAME" --password-stdin
-            docker push $IMAGE_NAME:v1
-         
+       
+    publish-latest:
+      executors: docker-publisher
+      steps:
+        - attach_workspace:
+            at: /tmp/workspace
+            
+        - setup_remote_docker:
+        - run: 
+            name: Load Saved file
+            command: docker load -i /tmp/workspace/myimage.tar
+            
+        - run:
+            name: publish image to docker hub
+            command:
+               echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --pasword-stdin
+               docker push $IMAGE_NAME:v2
+            
 workflows:
   version: 2
   build-master:
     jobs:
-     - build:
-         filters:
-           branches:
-             only: master
-      
-     - publish-latest:
-         requires:
-           - build
-         filters:
-           branches:
-             only: master
-         
-    
-              
-              
-              
+    - build:
+        filters:
+          branches:
+            only: masters
+    - publish-latest:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
